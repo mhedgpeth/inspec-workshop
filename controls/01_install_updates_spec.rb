@@ -19,3 +19,13 @@ RPM package's signature is always checked prior to its installation."
     its('content') { should match /gpgcheck=1/ }
   end
 end
+
+control "cis-centos-1-5-1-level-1" do
+  impact 1.0
+  title "Set the owner and group of /etc/grub.conf to the root user."
+  desc "Setting the owner and group to root prevents non-root users from changing the file."
+  describe file('/etc/grub.conf') do
+    its('owner') { should eq 'root' }
+    its('group') { should eq 'root' }
+  end
+end
